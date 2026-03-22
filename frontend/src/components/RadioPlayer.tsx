@@ -3,17 +3,23 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 interface RadioPlayerProps {
-  streamUrl: string;
   onEpisodeChange?: (episodeId: number | null) => void;
 }
 
-export default function RadioPlayer({ streamUrl, onEpisodeChange }: RadioPlayerProps) {
+export default function RadioPlayer({ onEpisodeChange }: RadioPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.8);
   const [currentTrack, setCurrentTrack] = useState<string | null>(null);
   const [listeners, setListeners] = useState(0);
+  const [streamUrl, setStreamUrl] = useState<string>('');
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const wsRef = useRef<WebSocket | null>(null);
+
+  // Set stream URL based on current protocol and host
+  useEffect(() => {
+    const protocol = window.location.protocol === 'https:' ? 'https:' : 'http:';
+    setStreamUrl(`${protocol}//${window.location.host}/stream`);
+  }, []);
 
   // Fetch stream status
   const fetchStatus = useCallback(async () => {
@@ -66,7 +72,7 @@ export default function RadioPlayer({ streamUrl, onEpisodeChange }: RadioPlayerP
   }, [fetchStatus]);
 
   const togglePlay = () => {
-    if (!audioRef.current) {
+    if (!audioRef.current && streamUrl) {
       audioRef.current = new Audio(streamUrl);
       audioRef.current.volume = volume;
     }

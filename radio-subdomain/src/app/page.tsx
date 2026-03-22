@@ -2,22 +2,26 @@
 
 import { useState, useEffect, useRef } from 'react';
 
-const STREAM_URL = process.env.NEXT_PUBLIC_STREAM_URL || 'http://localhost:8000/stream';
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001';
-
 export default function RadioPage() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.8);
   const [currentTrack, setCurrentTrack] = useState<string | null>(null);
   const [listeners, setListeners] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [streamUrl, setStreamUrl] = useState<string>('');
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Fetch initial status
+    // Set stream URL based on current protocol and host
+    const protocol = window.location.protocol === 'https:' ? 'https:' : 'http:';
+    setStreamUrl(`${protocol}//${window.location.host}/stream`);
+  }, []);
+
+  useEffect(() => {
+    // Fetch initial status using relative URL (nginx proxies /api/)
     const fetchStatus = async () => {
       try {
-        const response = await fetch(`${API_URL}/api/stream/status`);
+        const response = await fetch('/api/stream/status');
         if (response.ok) {
           const data = await response.json();
           setListeners(data.listeners || 0);
@@ -36,8 +40,8 @@ export default function RadioPage() {
   }, []);
 
   const togglePlay = () => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio(STREAM_URL);
+    if (!audioRef.current && streamUrl) {
+      audioRef.current = new Audio(streamUrl);
       audioRef.current.volume = volume;
       audioRef.current.crossOrigin = 'anonymous';
     }
