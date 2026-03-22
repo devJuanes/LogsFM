@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/c/Python313/python.exe -c \"import pexpect; print\\(dir\\(pexpect\\)\\)\")"
+    ]
+  }
+}

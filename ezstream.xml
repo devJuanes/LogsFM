@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ezstream>
+    <url>http://localhost:8000/stream</url>
+    <sourcepassword>hackme</sourcepassword>
+    <filename>/var/lib/icecast2/playlist.txt</filename>
+    <format>MP3</format>
+    <stream_once>0</stream_once>
+    <playlist_program>0</playlist_program>
+    <reconnect>1</reconnect>
+    <reconnect_attempts>0</reconnect_attempts>
+    <reconnect_waitsec>5</reconnect_waitsec>
+    <shuffle>1</shuffle>
+    <svrinfoname>Mi Radio</svrinfoname>
+    <svrinfourl>http://localhost:8000</svrinfourl>
+    <svrinfogenre>radio</svrinfogenre>
+    <svrinfodescription>Radio en vivo</svrinfodescription>
+    <svrinfobitrate>128</svrinfobitrate>
+    <svrinfochannels>2</svrinfochannels>
+    <svrinfosamplerate>44100</svrinfosamplerate>
+</ezstream>
