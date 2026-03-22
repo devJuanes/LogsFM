@@ -32,7 +32,9 @@ export default function RadioPlayer({ streamUrl, onEpisodeChange }: RadioPlayerP
   // WebSocket for real-time updates
   useEffect(() => {
     const connectWebSocket = () => {
-      wsRef.current = new WebSocket(`ws://localhost:8001/ws/listeners`);
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const wsUrl = `${protocol}//${window.location.host}/ws/listeners`;
+      wsRef.current = new WebSocket(wsUrl);
 
       wsRef.current.onmessage = (event) => {
         try {
