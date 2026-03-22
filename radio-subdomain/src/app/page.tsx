@@ -46,6 +46,8 @@ export default function RadioPage() {
       audioRef.current.crossOrigin = 'anonymous';
     }
 
+    if (!audioRef.current) return;
+
     if (isPlaying) {
       audioRef.current.pause();
     } else {
