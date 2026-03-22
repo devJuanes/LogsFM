@@ -29,7 +29,7 @@ export default function Home() {
             {/* Main Player */}
             <div className="md:col-span-2">
               <RadioPlayer
-                streamUrl="http://localhost:8000/stream"
+                streamUrl="https://radio.logsfm.com/stream"
                 onEpisodeChange={setCurrentEpisodeId}
               />
             </div>
