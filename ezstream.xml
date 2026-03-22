@@ -10,11 +10,14 @@
     <reconnect_attempts>0</reconnect_attempts>
     <reconnect_waitsec>5</reconnect_waitsec>
     <shuffle>1</shuffle>
-    <svrinfoname>Mi Radio</svrinfoname>
+    <svrinfoname>LogsFM Radio</svrinfoname>
     <svrinfourl>http://localhost:8000</svrinfourl>
     <svrinfogenre>radio</svrinfogenre>
-    <svrinfodescription>Radio en vivo</svrinfodescription>
+    <svrinfodescription>Radio en vivo 24/7</svrinfodescription>
     <svrinfobitrate>128</svrinfobitrate>
     <svrinfochannels>2</svrinfochannels>
     <svrinfosamplerate>44100</svrinfosamplerate>
+    <stream>
+        <mount>/stream</mount>
+    </stream>
 </ezstream>
